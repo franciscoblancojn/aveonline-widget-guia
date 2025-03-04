@@ -40,7 +40,7 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'label' => __('Color', 'plugin-name'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .'.$class => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .'.$class => 'color: {{VALUE}};--color: {{VALUE}};',
                 ],
             ]
         );
@@ -109,7 +109,7 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
-                    '{{WRAPPER}} .'.$class  => '_margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .'.$class  => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );

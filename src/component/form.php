@@ -37,11 +37,9 @@ function AVWG_Component_Form($settings)  {
         }
         .AVWG_Component_Form_title{
             width:100%;
-            margin:0 !important;
         }
         .AVWG_Component_Form_text{
             width:100%;
-            margin:0 !important;
         }
         .AVWG_Component_Form_content_btn{    
             display: flex;
@@ -57,11 +55,7 @@ function AVWG_Component_Form($settings)  {
             content:"";
             width: 1.5rem;
             aspect-ratio: 1/1;
-            border: 0.3rem solid #fff;
-            border-color: color-contrast(
-                #fff vs #fff,
-                #fff
-            );
+            border: 0.3rem solid var(--color);
             border-top-color: transparent;
             border-radius: 100%;
             margin: auto;
