@@ -1,11 +1,11 @@
 <?php
 
-function AVWG_Component_Widget()  {
+function AVWG_Component_Widget($settings)  {
     ob_start();
     ?>
     <div class="AVWG_Component_Widget">
-        <?=AVWG_Component_Form()?>
-        <?=AVWG_Component_Guias()?>
+        <?=AVWG_Component_Form($settings)?>
+        <?=AVWG_Component_Guias($settings)?>
     </div>
     <style>
         .AVWG_Component_Widget{

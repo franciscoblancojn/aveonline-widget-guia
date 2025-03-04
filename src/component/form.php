@@ -1,32 +1,32 @@
 <?php
 
-function AVWG_Component_Form()  {
+function AVWG_Component_Form($settings)  {
     ob_start();
     ?>
     <div class="AVWG_Component_Form">
         <h4 class="AVWG_Component_Form_title">
-            <?=($title ?? "Rastrea tu guía")?>
+            <?=($settings["title"] ?? "Rastrea tu guía")?>
         </h4>
         <p class="AVWG_Component_Form_alert">
-            <?=($alert ?? "Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.")?>
+            <?=($settings["alert"] ?? "Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.")?>
         </p>
         <p class="AVWG_Component_Form_text">
-            <?=($text ?? "En caso de salir alguna NOVEDAD, debes comunicarte directamente con la tienda en donde hiciste la compra, pues son ellos quienes deben resolverla, para que tu pedido llegue pronto.")?>
+            <?=($settings["text"] ?? "En caso de salir alguna NOVEDAD, debes comunicarte directamente con la tienda en donde hiciste la compra, pues son ellos quienes deben resolverla, para que tu pedido llegue pronto.")?>
         </p>
         <label>
             <div class="AVWG_Component_Form_label">
-                <?=($label ?? "Número de guía")?>
+                <?=($settings["label"] ?? "Número de guía")?>
             </div>
             <input
                 id="AVWG_Component_Form_input"
                 type="text"
-                placeholder="<?=($placeholder ?? "Número de guía")?>"
+                placeholder="<?=($settings["placeholder"] ?? "Número de guía")?>"
                 class="AVWG_Component_Form_input"
             />
         </label>
         <div class="AVWG_Component_Form_content_btn">
             <button id="AVWG_Component_Form_btn" class="AVWG_Component_Form_btn" onclick="AVWG_onGetGuias()">
-                <?=($btn ?? "Buscar")?>
+                <?=($settings["btn"] ?? "Buscar")?>
             </button>
         </div>
     </div>

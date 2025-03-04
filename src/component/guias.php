@@ -1,5 +1,5 @@
 <?php
-function AVWG_Component_Guias()  {
+function AVWG_Component_Guias($settings)  {
     ob_start();
     ?>
     <div id="AVWG_Component_Guias" class="AVWG_Component_Guias">
@@ -11,7 +11,7 @@ function AVWG_Component_Guias()  {
                 return `
                     <div class="AVWG_Component_Guia">
                         <p class="AVWG_Component_Guia_values">
-                            Número de guía: 
+                            <?=$settings["guia_numeroguia"]?>: 
                             <strong>${guia?.numeroguia}</strong>
                         </p>
                         <p class="AVWG_Component_Guia_status">
@@ -34,15 +34,16 @@ function AVWG_Component_Guias()  {
                         </div>
                     </div>
                     <p class="AVWG_Component_Guia_values">
-                        Número de guía: 
+                        <?=$settings["guia_numeroguia"]?>: 
                         <strong>${guia?.numeroguia}</strong>
                     </p>
                     <p class="AVWG_Component_Guia_values">
-                        Nombre: 
+                        <?=$settings["guia_destinatario"]?>: 
                         <strong>${guia?.destinatario}</strong>
                     </p>
                     <p class="AVWG_Component_Guia_status">
-                        Estado: ${guia?.nombreEstadoAve}
+                        <?=$settings["guia_nombreEstadoAve"]?>: 
+                        <strong>${guia?.nombreEstadoAve}</strong>
                     </p>
                 </div>
             `
