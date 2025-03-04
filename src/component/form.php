@@ -41,6 +41,9 @@ function AVWG_Component_Form($settings)  {
         .AVWG_Component_Form_text{
             width:100%;
         }
+        .AVWG_Component_Form_input{
+            outline: none;
+        }
         .AVWG_Component_Form_content_btn{    
             display: flex;
         }

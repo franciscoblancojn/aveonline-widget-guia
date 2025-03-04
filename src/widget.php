@@ -194,6 +194,22 @@ class AVWG_AveFormGuias extends Widget_Base {
             ]
         );
         $this->add_control(
+            'guia_origen',
+            [
+                'label' => __('Origen', 'plugin-name'),
+                'type' => Controls_Manager::TEXT,
+                'default' => __('Origen', 'plugin-name'),
+            ]
+        );
+        $this->add_control(
+            'guia_destino',
+            [
+                'label' => __('Destino', 'plugin-name'),
+                'type' => Controls_Manager::TEXT,
+                'default' => __('Destino', 'plugin-name'),
+            ]
+        );
+        $this->add_control(
             'guia_numeroguia',
             [
                 'label' => __('Número de guía', 'plugin-name'),

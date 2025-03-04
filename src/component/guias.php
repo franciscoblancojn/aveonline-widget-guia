@@ -16,13 +16,13 @@ function AVWG_Component_Guias($settings)  {
             if(!guia?.transportadora){
                 return `
                     <div class="AVWG_Component_Guia">
-                        <p class="AVWG_Component_Guia_values">
+                        <div class="AVWG_Component_Guia_values">
                             <?=$settings["guia_numeroguia"]?>: 
                             <strong>${guia?.numeroguia}</strong>
-                        </p>
-                        <p class="AVWG_Component_Guia_status">
+                        </div>
+                        <div class="AVWG_Component_Guia_status">
                             Estado: Guía no Encontrada
-                        </p>
+                        </div>
                     </div>
                 `
             }
@@ -30,27 +30,33 @@ function AVWG_Component_Guias($settings)  {
                 <div class="AVWG_Component_Guia">
                     <div class="AVWG_Component_Guia_top">
                         <div class="AVWG_Component_Guia_origen">
-                           ${guia?.origen}
-                           ${guia?.direccion}
+                            <?=$settings["guia_origen"]?>: 
+                            <strong>
+                                ${guia?.origen}
+                                ${guia?.direccion}
+                           </strong>
                         </div>
                         <div class="AVWG_Component_Guia_destino">
-                           ${guia?.destino_destinatario}
-                           ${guia?.barrio_destinatario}
-                           ${guia?.direccion_destinatario}
+                            <?=$settings["guia_destino"]?>: 
+                            <strong>
+                                ${guia?.destino_destinatario}
+                                ${guia?.barrio_destinatario}
+                                ${guia?.direccion_destinatario}
+                           </strong>
                         </div>
                     </div>
-                    <p class="AVWG_Component_Guia_numeroguia">
+                    <div class="AVWG_Component_Guia_numeroguia">
                         <?=$settings["guia_numeroguia"]?>: 
                         <strong>${guia?.numeroguia}</strong>
-                    </p>
-                    <p class="AVWG_Component_Guia_destinatario">
+                    </div>
+                    <div class="AVWG_Component_Guia_destinatario">
                         <?=$settings["guia_destinatario"]?>: 
                         <strong>${guia?.destinatario}</strong>
-                    </p>
-                    <p class="AVWG_Component_Guia_status">
+                    </div>
+                    <div class="AVWG_Component_Guia_status">
                         <?=$settings["guia_nombreEstadoAve"]?>: 
                         <strong>${guia?.nombreEstadoAve}</strong>
-                    </p>
+                    </div>
                 </div>
             `
         }
