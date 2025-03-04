@@ -226,6 +226,7 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->addStyleControler('label','Label','AVWG_Component_Form_label');
         $this->addStyleControler('input','Input','AVWG_Component_Form_input');
         $this->addStyleControler('btn','Boton','AVWG_Component_Form_btn');
+        $this->addStyleControler('guia','Guía','AVWG_Component_Guia');
         $this->addStyleControler('origen','Origen','AVWG_Component_Guia_origen');
         $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destino');
         $this->addStyleControler('numeroguia','Número de guía','AVWG_Component_Guia_numeroguia');

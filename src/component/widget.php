@@ -11,7 +11,12 @@ function AVWG_Component_Widget($settings)  {
         .AVWG_Component_Widget{
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 2rem;
+        }
+        @media (max-width:767px) {
+            .AVWG_Component_Widget{
+                grid-template-columns: 1fr;
+            }
         }
 
     </style>

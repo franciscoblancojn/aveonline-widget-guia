@@ -5,6 +5,12 @@ function AVWG_Component_Guias($settings)  {
     <div id="AVWG_Component_Guias" class="AVWG_Component_Guias">
         
     </div>
+    <style>
+        .AVWG_Component_Guias{
+            display:grid;
+            gap:1rem;
+        }
+    </style>
     <script>
         const AVWG_onGetHtmlGuia = (guia) => {
             if(!guia?.transportadora){
