@@ -7,9 +7,9 @@ function AVWG_Component_Form($settings)  {
         <h4 class="AVWG_Component_Form_title">
             <?=($settings["title"] ?? "Rastrea tu guía")?>
         </h4>
-        <p class="AVWG_Component_Form_alert">
+        <div class="AVWG_Component_Form_alert">
             <?=($settings["alert"] ?? "Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.")?>
-        </p>
+        </div>
         <div class="AVWG_Component_Form_text">
             <?=($settings["text"] ?? "En caso de salir alguna NOVEDAD, debes comunicarte directamente con la tienda en donde hiciste la compra, pues son ellos quienes deben resolverla, para que tu pedido llegue pronto.")?>
         </div>
