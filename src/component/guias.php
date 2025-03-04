@@ -10,6 +10,10 @@ function AVWG_Component_Guias($settings)  {
             display:grid;
             gap:1rem;
         }
+        .AVWG_Component_Guia{
+            display:grid;
+            gap:1rem;
+        }
     </style>
     <script>
         const AVWG_onGetHtmlGuia = (guia) => {
