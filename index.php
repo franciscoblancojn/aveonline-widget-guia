@@ -24,7 +24,7 @@ if(is_admin()){
         __FILE__,
         'aveonline-widget-guia'
     );
-    $myUpdateChecker->setAuthentication('glpat-ZdrFZdzhfp6FWNFhvggn');
+    $myUpdateChecker->setAuthentication('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');
     $myUpdateChecker->setBranch('master');
 }
 //AVWG_
