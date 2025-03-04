@@ -24,5 +24,5 @@ define("AVWG_DIR",plugin_dir_path( __FILE__ ));
 define("AVWG_URL",plugin_dir_url(__FILE__));
 
 if(is_admin()){
-    require_once plugin_dir_path( __FILE__ ) . 'src/update.php';
+    require_once plugin_dir_path( __FILE__ ) . 'update.php';
 }
