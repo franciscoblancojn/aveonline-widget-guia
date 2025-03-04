@@ -33,11 +33,11 @@ function AVWG_Component_Guias($settings)  {
                            ${guia?.direccion_destinatario}
                         </div>
                     </div>
-                    <p class="AVWG_Component_Guia_values">
+                    <p class="AVWG_Component_Guia_numeroguia">
                         <?=$settings["guia_numeroguia"]?>: 
                         <strong>${guia?.numeroguia}</strong>
                     </p>
-                    <p class="AVWG_Component_Guia_values">
+                    <p class="AVWG_Component_Guia_destinatario">
                         <?=$settings["guia_destinatario"]?>: 
                         <strong>${guia?.destinatario}</strong>
                     </p>

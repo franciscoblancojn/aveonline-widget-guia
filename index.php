@@ -40,3 +40,4 @@ function AVWG_register_AveFormGuias_load() {
     }
 }
 add_action('plugins_loaded', 'AVWG_register_AveFormGuias_load');
+

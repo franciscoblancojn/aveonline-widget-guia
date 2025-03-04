@@ -3,6 +3,10 @@ namespace Elementor;
 
 if (!defined('ABSPATH')) exit; // Bloquear acceso directo
 
+use Elementor\Group_Control_Dimensions;
+use Elementor\Group_Control_Background; 
+use Elementor\Group_Control_Border;
+
 class AVWG_AveFormGuias extends Widget_Base {
 
     public function get_name() {
@@ -19,6 +23,78 @@ class AVWG_AveFormGuias extends Widget_Base {
 
     public function get_categories() {
         return ['general'];
+    }
+    private function addStyleControler($key,$name,$class) {
+
+        $this->start_controls_section(
+            $name.'_style',
+            [
+                'label' => __($name, 'plugin-name'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        // Control de color del texto
+        $this->add_control(
+            $name.'_color',
+            [
+                'label' => __('Color', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .'.$class => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Control de tipografía
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => $name.'_typography',
+                'selector' => '{{WRAPPER}} .'.$class,
+            ]
+        );
+
+        // Control de espaciado (margen y padding)
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => $name.'_box_shadow',
+                'selector' => '{{WRAPPER}} .'.$class,
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => $name.'_background',
+                'label' => __('Fondo', 'plugin-name'),
+                'types' => ['classic', 'gradient', 'video'],
+                'selector' => '{{WRAPPER}} .'.$class,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => $name.'_border',
+                'label' => __('Borde', 'plugin-name'),
+                'selector' => '{{WRAPPER}} .'.$class,
+            ]
+        );
+        $this->add_control(
+            $name.'_border_radius',
+            [
+                'label' => __('Radio de borde', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .'.$class => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+
+        $this->end_controls_section(); // Cerrar la sección de estilos
+
     }
 
     protected function _register_controls() {
@@ -54,6 +130,15 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'default' => __('Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.', 'plugin-name'),
             ]
         );
+
+        $this->end_controls_section();
+        $this->start_controls_section(
+            'content_section',
+            [
+                'label' => __('Formulario', 'plugin-name'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
         $this->add_control(
             'label',
             [
@@ -76,6 +161,14 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'label' => __('Boton', 'plugin-name'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Buscar', 'plugin-name'),
+            ]
+        );
+        $this->end_controls_section();
+        $this->start_controls_section(
+            'content_section',
+            [
+                'label' => __('Guía', 'plugin-name'),
+                'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
         $this->add_control(
@@ -102,9 +195,23 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'default' => __('Estado', 'plugin-name'),
             ]
         );
-
-
         $this->end_controls_section();
+
+
+        $this->addStyleControler('title','Titulo','AVWG_Component_Form_title');
+        $this->addStyleControler('alert','Alerta','AVWG_Component_Form_alert');
+        $this->addStyleControler('text','Texto','AVWG_Component_Form_text');
+        $this->addStyleControler('label','Label','AVWG_Component_Form_label');
+        $this->addStyleControler('input','Input','AVWG_Component_Form_input');
+        $this->addStyleControler('btn','Boton','AVWG_Component_Form_btn');
+        $this->addStyleControler('origen','Origen','AVWG_Component_Guia_origen');
+        $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destino');
+        $this->addStyleControler('numeroguia','Número de guía','AVWG_Component_Guia_numeroguia');
+        $this->addStyleControler('destinatario','Nombre','AVWG_Component_Guia_destinatario');
+        $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destinatario');
+        $this->addStyleControler('nombreEstadoAve','Estado','AVWG_Component_Guia_status');
+
+
     }
 
     protected function render() {
