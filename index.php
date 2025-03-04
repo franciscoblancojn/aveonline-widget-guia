@@ -24,5 +24,18 @@ define("AVWG_DIR",plugin_dir_path( __FILE__ ));
 define("AVWG_URL",plugin_dir_url(__FILE__));
 
 if(is_admin()){
-    require_once plugin_dir_path( __FILE__ ) . 'update.php';
+    // require_once plugin_dir_path( __FILE__ ) . 'update.php';
 }
+
+function AVWG_register_AveFormGuias($widgets_manager) {
+    require_once AVWG_DIR . 'src/widget.php';
+    $widgets_manager->register(new \Elementor\AVWG_AveFormGuias());
+}
+add_action('elementor/widgets/register', 'AVWG_register_AveFormGuias');
+
+function AVWG_register_AveFormGuias_load() {
+    if (!did_action('elementor/loaded')) {
+        return;
+    }
+}
+add_action('plugins_loaded', 'AVWG_register_AveFormGuias_load');
