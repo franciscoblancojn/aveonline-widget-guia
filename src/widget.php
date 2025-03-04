@@ -27,7 +27,7 @@ class AVWG_AveFormGuias extends Widget_Base {
     private function addStyleControler($key,$name,$class) {
 
         $this->start_controls_section(
-            $name.'_style',
+            $key.'_style',
             [
                 'label' => __($name, 'plugin-name'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -35,7 +35,7 @@ class AVWG_AveFormGuias extends Widget_Base {
         );
         // Control de color del texto
         $this->add_control(
-            $name.'_color',
+            $key.'_color',
             [
                 'label' => __('Color', 'plugin-name'),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -49,7 +49,7 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => $name.'_typography',
+                'name' => $key.'_typography',
                 'selector' => '{{WRAPPER}} .'.$class,
             ]
         );
@@ -58,14 +58,14 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
-                'name' => $name.'_box_shadow',
+                'name' => $key.'_box_shadow',
                 'selector' => '{{WRAPPER}} .'.$class,
             ]
         );
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name' => $name.'_background',
+                'name' => $key.'_background',
                 'label' => __('Fondo', 'plugin-name'),
                 'types' => ['classic', 'gradient', 'video'],
                 'selector' => '{{WRAPPER}} .'.$class,
@@ -75,13 +75,13 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => $name.'_border',
+                'name' => $key.'_border',
                 'label' => __('Borde', 'plugin-name'),
                 'selector' => '{{WRAPPER}} .'.$class,
             ]
         );
         $this->add_control(
-            $name.'_border_radius',
+            $key.'_border_radius',
             [
                 'label' => __('Radio de borde', 'plugin-name'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
@@ -92,7 +92,7 @@ class AVWG_AveFormGuias extends Widget_Base {
             ]
         );
         $this->add_control(
-            $name.'_padding',
+            $key.'_padding',
             [
                 'label' => __('Padding', 'plugin-name'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
@@ -103,7 +103,7 @@ class AVWG_AveFormGuias extends Widget_Base {
             ]
         );
         $this->add_control(
-            $name.'_margin',
+            $key.'_margin',
             [
                 'label' => __('Margin', 'plugin-name'),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
@@ -220,12 +220,12 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->end_controls_section();
 
 
-        $this->addStyleControler('title','Titulo','AVWG_Component_Form_title');
-        $this->addStyleControler('alert','Alerta','AVWG_Component_Form_alert');
-        $this->addStyleControler('text','Texto','AVWG_Component_Form_text');
-        $this->addStyleControler('label','Label','AVWG_Component_Form_label');
-        $this->addStyleControler('input','Input','AVWG_Component_Form_input');
-        $this->addStyleControler('btn','Boton','AVWG_Component_Form_btn');
+        $this->addStyleControler('Titulo','Titulo','AVWG_Component_Form_title');
+        $this->addStyleControler('Alerta','Alerta','AVWG_Component_Form_alert');
+        $this->addStyleControler('Texto','Texto','AVWG_Component_Form_text');
+        $this->addStyleControler('Label','Label','AVWG_Component_Form_label');
+        $this->addStyleControler('Input','Input','AVWG_Component_Form_input');
+        $this->addStyleControler('Boton','Boton','AVWG_Component_Form_btn');
         $this->addStyleControler('guia','Guía','AVWG_Component_Guia');
         $this->addStyleControler('origen','Origen','AVWG_Component_Guia_origen');
         $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destino');
