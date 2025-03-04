@@ -26,6 +26,7 @@ define("AVWG_URL",plugin_dir_url(__FILE__));
 if(is_admin()){
     // require_once plugin_dir_path( __FILE__ ) . 'update.php';
 }
+require_once AVWG_DIR . 'src/component/_.php';
 
 function AVWG_register_AveFormGuias($widgets_manager) {
     require_once AVWG_DIR . 'src/widget.php';

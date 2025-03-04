@@ -45,6 +45,7 @@ class AVWG_AveFormGuias extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         echo '<h2>' . esc_html($settings['text']) . '</h2>';
+        echo AVWG_Component_Widget();
     }
 }
 

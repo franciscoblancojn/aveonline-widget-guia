@@ -4,30 +4,122 @@ function AVWG_Component_Form()  {
     ob_start();
     ?>
     <div class="AVWG_Component_Form">
-        <h2 class="AVWG_Component_Form_title">
-            <?=($title || "Rastrea tu guía")?>
-        </h2>
+        <h4 class="AVWG_Component_Form_title">
+            <?=($title ?? "Rastrea tu guía")?>
+        </h4>
         <p class="AVWG_Component_Form_alert">
-            <?=($alert || "Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.")?>
+            <?=($alert ?? "Hola, recuerda que puedes rastrear múltiples guías, separándolas por comas.")?>
         </p>
         <p class="AVWG_Component_Form_text">
-            <?=($text || "En caso de salir alguna NOVEDAD, debes comunicarte directamente con la tienda en donde hiciste la compra, pues son ellos quienes deben resolverla, para que tu pedido llegue pronto.")?>
+            <?=($text ?? "En caso de salir alguna NOVEDAD, debes comunicarte directamente con la tienda en donde hiciste la compra, pues son ellos quienes deben resolverla, para que tu pedido llegue pronto.")?>
         </p>
         <label>
             <div class="AVWG_Component_Form_label">
-                <?=($label || "Número de guía")?>
+                <?=($label ?? "Número de guía")?>
             </div>
             <input
+                id="AVWG_Component_Form_input"
                 type="text"
-                placeholder="<?=($placeholder || "Número de guía")?>"
+                placeholder="<?=($placeholder ?? "Número de guía")?>"
                 class="AVWG_Component_Form_input"
             />
         </label>
-        <button>
-            <?=($btn || "Buscar")?>
-        </button>
+        <div class="AVWG_Component_Form_content_btn">
+            <button id="AVWG_Component_Form_btn" class="AVWG_Component_Form_btn" onclick="AVWG_onGetGuias()">
+                <?=($btn ?? "Buscar")?>
+            </button>
+        </div>
     </div>
-   
+    <style>
+        .AVWG_Component_Form{
+            display:grid;
+            gap:.5rem;
+        }
+        .AVWG_Component_Form_title{
+            width:100%;
+            margin:0 !important;
+        }
+        .AVWG_Component_Form_text{
+            width:100%;
+            margin:0 !important;
+        }
+        .AVWG_Component_Form_content_btn{    
+            display: flex;
+        }
+        .AVWG_Component_Form_btn{
+            margin-left:auto;
+            position: relative;
+        }
+        .AVWG_Component_Form_btn.loader{
+            color:transparent !important;
+        }
+        .AVWG_Component_Form_btn.loader:before{
+            content:"";
+            width: 1.5rem;
+            aspect-ratio: 1/1;
+            border: 0.3rem solid #fff;
+            border-color: color-contrast(
+                #fff vs #fff,
+                #fff
+            );
+            border-top-color: transparent;
+            border-radius: 100%;
+            margin: auto;
+            animation: AVWG-to-rotate 1s infinite;
+            display:block;
+            position: absolute;
+            inset:0;
+        }
+        @keyframes AVWG-to-rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+    <script>
+        const AVWG_onGetGuias_Request = async(numeroguia) => {
+            try {
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                const raw = JSON.stringify({
+                    "tipo": "infoGuiaP2PV3",
+                    "guia": numeroguia
+                });
+
+                const requestOptions = {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: "follow"
+                };
+
+                const response = await fetch("https://app.aveonline.co/api/comunes/v2.0/guiasNacionalP2P.php", requestOptions)
+                const result = await response.json()
+                return {
+                    ...result?.data?.[0],
+                    numeroguia
+                }
+            } catch (e){
+                return {
+                    numeroguia
+                };
+            }
+        }
+        const AVWG_onGetGuias = async ()=>{
+            const guias = `${document.getElementById("AVWG_Component_Form_input")?.value ?? ''}`.split(',')
+            if(guias && guias.length > 0 && guias[0]!=''){
+                const btn = document.getElementById("AVWG_Component_Form_btn")
+                btn.classList.add("loader")
+                const guiasResult = await Promise.all(guias.map(guia => AVWG_onGetGuias_Request(guia)));
+                btn.classList.remove("loader")
+                if(typeof AVWG_onGetGuias_callback == 'function' ){
+                    AVWG_onGetGuias_callback(guiasResult)
+                }
+            }
+        }
+    </script>
     <?php
     return ob_get_clean();
 }
