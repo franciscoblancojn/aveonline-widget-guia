@@ -91,6 +91,28 @@ class AVWG_AveFormGuias extends Widget_Base {
                 ],
             ]
         );
+        $this->add_control(
+            $name.'_padding',
+            [
+                'label' => __('Padding', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .'.$class  => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            $name.'_margin',
+            [
+                'label' => __('Margin', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors' => [
+                    '{{WRAPPER}} .'.$class  => '_margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
         
 
         $this->end_controls_section(); // Cerrar la sección de estilos
