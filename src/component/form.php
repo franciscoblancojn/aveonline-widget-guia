@@ -75,7 +75,8 @@ function AVWG_Component_Form($settings)  {
 
     </style>
     <script>
-        const AVWG_onGetGuias_Request = async(numeroguia) => {
+        const AVWG_onGetGuias_Request = async(n) => {
+            const numeroguia = `${n}`.replaceAll(" ","")
             try {
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
