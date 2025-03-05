@@ -86,31 +86,12 @@ function AVWG_updater($transient) {
 
     // Comparar versiones
     if (version_compare($current_version, $latest_version, '<')) {
-        $download_url = '';
-
-        // Buscar el archivo ZIP en los assets
-        if (!empty($release->assets)) {
-            foreach ($release->assets as $asset) {
-                if (strpos($asset->name, '.zip') !== false) {
-                    $download_url = $asset->browser_download_url;
-                    break;
-                }
-            }
-        }
-
-        // Si no hay ZIP en assets, usar zipball_url como última opción
-        if (empty($download_url) && isset($release->zipball_url)) {
-            $download_url = $release->zipball_url;
-        }
-
-        if (!empty($download_url)) {
-            $transient->response[$plugin_file] = (object) [
-                'new_version' => $latest_version,
-                'package'     => "https://github.com/franciscoblancojn/aveonline-widget-guia/archive/refs/heads/master.zip",
-                'slug'        => $plugin_slug,
-                'url'         => 'https://github.com/franciscoblancojn/aveonline-widget-guia',
-            ];
-        }
+        $transient->response[$plugin_file] = (object) [
+            'new_version' => $latest_version,
+            'package'     => "https://github.com/franciscoblancojn/aveonline-widget-guia/archive/refs/heads/master.zip",
+            'slug'        => $plugin_slug,
+            'url'         => 'https://github.com/franciscoblancojn/aveonline-widget-guia',
+        ];
     }
 
     return $transient;
