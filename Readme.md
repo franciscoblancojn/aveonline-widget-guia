@@ -1,14 +1,20 @@
 # Aveonline widget guia
  
 Contributors: Francisco Blanco
+
 Tags: aveonline, elementor, widget
+
 Requires at least: 5.0
+
 Tested up to: 5.9
+
 Stable tag: 1.0.8
+
 License: GPLv2 or later
+
 License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html)
 
-It is an plugin of wordpress, for Shipping in Colombia
+It is an plugin of wordpress, for Aveonline show Guia in Colombia with Elementor
 
 ## Description
 
