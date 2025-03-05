@@ -6,7 +6,7 @@ Requires at least: 5.0
 Tested up to: 5.9
 Stable tag: 1.0.8
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html)
 
 It is an plugin of wordpress, for Shipping in Colombia
 
@@ -24,12 +24,12 @@ It is an plugin of wordpress, for Shipping in Colombia
 ## Developer
 
 * Name: Francisco Blanco
-* Website: https://franciscoblanco.vercel.app/
+* Website: [https://franciscoblanco.vercel.app/](https://franciscoblanco.vercel.app/)
 * Email: blancofrancisco34@gmail.com
 
 ## Repositories
 
-* GitHub: https://github.com/franciscoblancojn/aveonline-widget-guia
+* GitHub: [https://github.com/franciscoblancojn/aveonline-widget-guia](https://github.com/franciscoblancojn/aveonline-widget-guia)
 ## License
 This plugin is distributed under the terms of the GNU General Public License v2.0 or later.
 
