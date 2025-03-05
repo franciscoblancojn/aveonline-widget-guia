@@ -41,6 +41,9 @@ function AVWG_updater($transient) {
     $plugin_data = get_plugin_data($plugin_path);
     $current_version = $plugin_data['Version'];
 
+    var_dump($current_versio);
+    var_dump($latest_version);
+
     // Comparar versiones
     if (version_compare($current_version, $latest_version, '<')) {
         $download_url = '';
@@ -64,7 +67,7 @@ function AVWG_updater($transient) {
         if (!empty($download_url)) {
             $transient->response[$plugin_file] = (object) [
                 'new_version' => $latest_version,
-                'package'     => $download_url,
+                'package'     => "https://github.com/franciscoblancojn/aveonline-widget-guia/archive/refs/heads/master.zip",
                 'slug'        => $plugin_slug,
                 'url'         => 'https://github.com/franciscoblancojn/aveonline-widget-guia',
             ];
