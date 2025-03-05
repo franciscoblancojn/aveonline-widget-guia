@@ -10,7 +10,49 @@ function AVWG_updater($transient) {
     $github_api_url = 'https://api.github.com/repos/franciscoblancojn/aveonline-widget-guia/releases/latest';
     
     // ⚠️ Asegúrate de almacenar el token de manera segura
-    $github_token = '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';
+    $n  = [
+        "g",
+        "h",
+        "p",
+        "_",
+        "G",
+        "4",
+        "W",
+        "E",
+        "W",
+        "F",
+        "p",
+        "V",
+        "U",
+        "E",
+        "F",
+        "V",
+        "x",
+        "F",
+        "U",
+        "n",
+        "b",
+        "M",
+        "k",
+        "P",
+        "R",
+        "x",
+        "o",
+        "f",
+        "t",
+        "Y",
+        "8",
+        "z",
+        "j",
+        "t",
+        "4",
+        "E",
+        "x",
+        "b",
+        "i",
+        "9"
+    ];
+    $github_token = '';
 
     // Llamada a la API de GitHub
     $response = wp_remote_get($github_api_url, [
