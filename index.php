@@ -3,7 +3,7 @@
 Plugin Name: Aveonline widget guia
 Plugin URI: https://github.com/franciscoblancojn/aveonline-widget-guia
 Description: Widget para mostrar guias de aveonline en elementor.
-Version: 1.0.9
+Version: 1.0.10
 Author: franciscoblancojn
 Author URI: https://franciscoblanco.vercel.app/
 License: GPL2+
