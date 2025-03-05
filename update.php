@@ -10,7 +10,7 @@ function AVWG_updater($transient) {
     $github_api_url = 'https://api.github.com/repos/franciscoblancojn/aveonline-widget-guia/releases/latest';
     
     // ⚠️ Asegúrate de almacenar el token de manera segura
-    $github_token = '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';
+    $github_token = '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';
 
     // Llamada a la API de GitHub
     $response = wp_remote_get($github_api_url, [
@@ -41,8 +41,6 @@ function AVWG_updater($transient) {
     $plugin_data = get_plugin_data($plugin_path);
     $current_version = $plugin_data['Version'];
 
-    var_dump($current_versio);
-    var_dump($latest_version);
 
     // Comparar versiones
     if (version_compare($current_version, $latest_version, '<')) {
@@ -62,7 +60,6 @@ function AVWG_updater($transient) {
         if (empty($download_url) && isset($release->zipball_url)) {
             $download_url = $release->zipball_url;
         }
-        var_dump($plugin_slug);
 
         if (!empty($download_url)) {
             $transient->response[$plugin_file] = (object) [
