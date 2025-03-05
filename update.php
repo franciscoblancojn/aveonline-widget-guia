@@ -4,18 +4,22 @@ function AVWG_updater($transient) {
         return $transient;
     }
 
-    $plugin_slug = AVWG_SLUG;
-    $plugin_file = $plugin_slug . '/index.php'; // Asegúrate de que esta ruta sea correcta
+    // Definir constantes
+    $plugin_slug =  basename(rtrim(AVWG_DIR, '/'));
+    $plugin_file = $plugin_slug . '/index.php';
     $github_api_url = 'https://api.github.com/repos/franciscoblancojn/aveonline-widget-guia/releases/latest';
+    
+    // ⚠️ Asegúrate de almacenar el token de manera segura
+    $github_token = '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';
 
-    $github_token = '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';
-
+    // Llamada a la API de GitHub
     $response = wp_remote_get($github_api_url, [
         'headers' => [
-            'User-Agent' => 'WordPress-Updater',
-            'Authorization' => 'token ' . $github_token, // 🔑 Autenticación con token
+            'User-Agent'    => 'WordPress-Updater',
+            'Authorization' => 'token ' . $github_token,
         ]
     ]);
+    
     if (is_wp_error($response)) {
         return $transient;
     }
@@ -28,46 +32,52 @@ function AVWG_updater($transient) {
 
     $latest_version = ltrim($release->tag_name, 'v');
 
-
     // Obtener la versión actual del plugin
     if (!function_exists('get_plugin_data')) {
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
     }
 
-    $plugin_data = get_plugin_data(AVWG_DIR . 'index.php' );
+    $plugin_path = defined('AVWG_DIR') ? AVWG_DIR . 'index.php' : WP_PLUGIN_DIR . '/' . $plugin_file;
+    $plugin_data = get_plugin_data($plugin_path);
     $current_version = $plugin_data['Version'];
 
-
+    // Comparar versiones
     if (version_compare($current_version, $latest_version, '<')) {
-        // Buscar el archivo zip en los assets
-        $download_url = 'https://github.com/franciscoblancojn/aveonline-widget-guia/archive/refs/heads/master.zip';
-        // if (!empty($release->assets)) {
-        //     foreach ($release->assets as $asset) {
-        //         if (strpos($asset->name, '.zip') !== false) {
-        //             $download_url = $asset->browser_download_url;
-        //             break;
-        //         }
-        //     }
-        // }
-        // // Si no hay assets, usar el zipball_url (menos confiable)
-        // if (empty($download_url)) {
-        //     $download_url = $release->zipball_url;
-        // }
-        // var_dump($download_url);
+        $download_url = '';
 
-        $transient->response[$plugin_file] = (object) [
-            'new_version' => $latest_version,
-            'package'     => $download_url,
-            'slug'        => $plugin_slug,
-            'url'         => 'https://github.com/franciscoblancojn/aveonline-widget-guia',
-        ];
+        // Buscar el archivo ZIP en los assets
+        if (!empty($release->assets)) {
+            foreach ($release->assets as $asset) {
+                if (strpos($asset->name, '.zip') !== false) {
+                    $download_url = $asset->browser_download_url;
+                    break;
+                }
+            }
+        }
+
+        // Si no hay ZIP en assets, usar zipball_url como última opción
+        if (empty($download_url) && isset($release->zipball_url)) {
+            $download_url = $release->zipball_url;
+        }
+        var_dump($plugin_slug);
+
+        if (!empty($download_url)) {
+            $transient->response[$plugin_file] = (object) [
+                'new_version' => $latest_version,
+                'package'     => $download_url,
+                'slug'        => $plugin_slug,
+                'url'         => 'https://github.com/franciscoblancojn/aveonline-widget-guia',
+            ];
+        }
     }
 
     return $transient;
 }
 add_filter('site_transient_update_plugins', 'AVWG_updater');
-// add_filter('pre_set_site_transient_update_plugins', 'AVWG_updater');
 
+/**
+ * Agregar botón de actualización manual al listado de plugins
+ */
 function AVWG_add_update_button($links, $file) {
     if ($file == AVWG_BASENAME) {
         $actualizar_url = wp_nonce_url(
@@ -75,10 +85,12 @@ function AVWG_add_update_button($links, $file) {
             'upgrade-plugin_' . $file
         );
 
-        $boton_actualizar = '<a href="' . esc_url($actualizar_url) . '" style="color: #0073aa; font-weight: bold;">Actualizar</a>';
-
-        $links[] = $boton_actualizar;
+        $links[] = '<a href="' . esc_url($actualizar_url) . '" style="color: #0073aa; font-weight: bold;">Actualizar</a>';
     }
     return $links;
 }
 add_filter('plugin_action_links_' . AVWG_BASENAME, 'AVWG_add_update_button', 10, 2);
+
+// Forzar actualización de plugins
+delete_site_transient('update_plugins');
+
