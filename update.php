@@ -1,11 +1,10 @@
 <?php
 function AVWG_updater($transient) {
-    error_log(print_r($transient, true));
     if (empty($transient->checked)) {
         return $transient;
     }
 
-    $plugin_slug = 'aveonline-widget-guia';
+    $plugin_slug = AVWG_SLUG;
     $plugin_file = $plugin_slug . '/index.php'; // Asegúrate de que esta ruta sea correcta
     $github_api_url = 'https://api.github.com/repos/franciscoblancojn/aveonline-widget-guia/releases/latest';
 

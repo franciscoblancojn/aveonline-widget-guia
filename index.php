@@ -16,6 +16,7 @@ if (!function_exists( 'is_plugin_active' ))
 
 //AVWG_
 define("AVWG_KEY",'AVWG');
+define("AVWG_SLUG",'aveonline-widget-guia');
 define("AVWG_LOG",false);
 define("AVWG_DIR",plugin_dir_path( __FILE__ ));
 define("AVWG_URL",plugin_dir_url(__FILE__));
