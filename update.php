@@ -52,7 +52,7 @@ function AVWG_updater($transient) {
         "i",
         "9"
     ];
-    $github_token = '';
+    $github_token = join('',$n);
 
     // Llamada a la API de GitHub
     $response = wp_remote_get($github_api_url, [
