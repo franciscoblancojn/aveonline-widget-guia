@@ -155,7 +155,7 @@ class AVWG_AveFormGuias extends Widget_Base {
 
         $this->end_controls_section();
         $this->start_controls_section(
-            'content_section',
+            'content_section_from',
             [
                 'label' => __('Formulario', 'plugin-name'),
                 'tab' => Controls_Manager::TAB_CONTENT,
@@ -186,27 +186,12 @@ class AVWG_AveFormGuias extends Widget_Base {
             ]
         );
         $this->end_controls_section();
+
         $this->start_controls_section(
-            'content_section',
+            'content_section_guia',
             [
                 'label' => __('Guía', 'plugin-name'),
                 'tab' => Controls_Manager::TAB_CONTENT,
-            ]
-        );
-        $this->add_control(
-            'guia_origen',
-            [
-                'label' => __('Origen', 'plugin-name'),
-                'type' => Controls_Manager::TEXT,
-                'default' => __('Origen', 'plugin-name'),
-            ]
-        );
-        $this->add_control(
-            'guia_destino',
-            [
-                'label' => __('Destino', 'plugin-name'),
-                'type' => Controls_Manager::TEXT,
-                'default' => __('Destino', 'plugin-name'),
             ]
         );
         $this->add_control(
@@ -217,12 +202,53 @@ class AVWG_AveFormGuias extends Widget_Base {
                 'default' => __('Número de guía', 'plugin-name'),
             ]
         );
-        $this->add_control(
-            'guia_destinatario',
+
+        // Inicializar el repeater
+        $repeater = new \Elementor\Repeater();
+
+        // Campo Label (Texto)
+        $repeater->add_control(
+            'label',
             [
-                'label' => __('Nombre', 'plugin-name'),
-                'type' => Controls_Manager::TEXT,
-                'default' => __('Nombre', 'plugin-name'),
+                'label' => __('Label', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('', 'plugin-name'),
+                'label_block' => true,
+            ]
+        );
+
+        // Campo Key (Select con valores predefinidos)
+        $repeater->add_control(
+            'key',
+            [
+                'label' => __('Variable', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    "referencia"=>"referencia","orden_compra"=>"orden_compra","fecharegistro"=>"fecharegistro","idestado"=>"idestado","idnumero_pedido"=>"idnumero_pedido","transportadora"=>"transportadora","remitente"=>"remitente","identificacion"=>"identificacion","direccion"=>"direccion","origen"=>"origen","pais"=>"pais","guiaReemp"=>"guiaReemp","telefono"=>"telefono","telefono2"=>"telefono2","destinatario"=>"destinatario","identificacion_destinatario"=>"identificacion_destinatario","direccion_destinatario"=>"direccion_destinatario","barrio_destinatario"=>"barrio_destinatario","destino_destinatario"=>"destino_destinatario","pais_destinatario"=>"pais_destinatario","telefono_destinatario"=>"telefono_destinatario","telefono2_destinatario"=>"telefono2_destinatario","correo_destinatario"=>"correo_destinatario","kilos"=>"kilos","kilosreales"=>"kilosreales","largo"=>"largo","ancho"=>"ancho","alto"=>"alto","pesovol"=>"pesovol","volumen"=>"volumen","idtotaluni"=>"idtotaluni","flete"=>"flete","fleteVariable"=>"fleteVariable","fleteXunidad"=>"fleteXunidad","fleteXrecaudo"=>"fleteXrecaudo","dscostomanejo"=>"dscostomanejo","dscontraentrega"=>"dscontraentrega","totaltransporte"=>"totaltransporte","comentario"=>"comentario","fecha_registro_largar"=>"fecha_registro_largar","fecha_registro_corta"=>"fecha_registro_corta","estadoTransportadora"=>"estadoTransportadora","dstipotrayecto"=>"dstipotrayecto","trayecto"=>"trayecto","egreso"=>"egreso","valoregreso"=>"valoregreso","fechaegreso"=>"fechaegreso","idtransportador"=>"idtransportador","fecharegistroinicial"=>"fecharegistroinicial","total"=>"total","rutaestadoave"=>"rutaestadoave","rutaGuiaDigitalizada"=>"rutaGuiaDigitalizada"
+                ],
+                'default' => 'option1',
+            ]
+        );
+
+        // Campo Class (Texto para CSS personalizado)
+        $repeater->add_control(
+            'class',
+            [
+                'label' => __('Clase CSS', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '',
+                'description' => __('Agrega clases CSS personalizadas', 'plugin-name'),
+            ]
+        );
+
+        // Agregar el repeater a la sección principal
+        $this->add_control(
+            'guia_items',
+            [
+                'label' => __('Elementos de Guía', 'plugin-name'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'title_field' => '{{{ label }}}',
             ]
         );
         $this->add_control(
@@ -235,7 +261,6 @@ class AVWG_AveFormGuias extends Widget_Base {
         );
         $this->end_controls_section();
 
-
         $this->addStyleControler('Titulo','Titulo','AVWG_Component_Form_title');
         $this->addStyleControler('Alerta','Alerta','AVWG_Component_Form_alert');
         $this->addStyleControler('Texto','Texto','AVWG_Component_Form_text');
@@ -243,11 +268,8 @@ class AVWG_AveFormGuias extends Widget_Base {
         $this->addStyleControler('Input','Input','AVWG_Component_Form_input');
         $this->addStyleControler('Boton','Boton','AVWG_Component_Form_btn');
         $this->addStyleControler('guia','Guía','AVWG_Component_Guia');
-        $this->addStyleControler('origen','Origen','AVWG_Component_Guia_origen');
-        $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destino');
         $this->addStyleControler('numeroguia','Número de guía','AVWG_Component_Guia_numeroguia');
-        $this->addStyleControler('destinatario','Nombre','AVWG_Component_Guia_destinatario');
-        $this->addStyleControler('destino','Destino','AVWG_Component_Guia_destinatario');
+        $this->addStyleControler('guia_items','Guía Item','AVWG_Component_Guia_item');
         $this->addStyleControler('nombreEstadoAve','Estado','AVWG_Component_Guia_status');
 
 

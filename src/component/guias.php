@@ -20,7 +20,7 @@ function AVWG_Component_Guias($settings)  {
             if(!guia?.transportadora){
                 return `
                     <div class="AVWG_Component_Guia">
-                        <div class="AVWG_Component_Guia_values">
+                        <div class="AVWG_Component_Guia_numeroguia">
                             <?=$settings["guia_numeroguia"]?>: 
                             <strong>${guia?.numeroguia}</strong>
                         </div>
@@ -32,35 +32,28 @@ function AVWG_Component_Guias($settings)  {
             }
             return `
                 <div class="AVWG_Component_Guia">
-                    <div class="AVWG_Component_Guia_top">
-                        <div class="AVWG_Component_Guia_origen">
-                            <?=$settings["guia_origen"]?>: 
-                            <strong>
-                                ${guia?.origen}
-                                ${guia?.direccion}
-                           </strong>
-                        </div>
-                        <div class="AVWG_Component_Guia_destino">
-                            <?=$settings["guia_destino"]?>: 
-                            <strong>
-                                ${guia?.destino_destinatario}
-                                ${guia?.barrio_destinatario}
-                                ${guia?.direccion_destinatario}
-                           </strong>
-                        </div>
-                    </div>
                     <div class="AVWG_Component_Guia_numeroguia">
                         <?=$settings["guia_numeroguia"]?>: 
                         <strong>${guia?.numeroguia}</strong>
                     </div>
-                    <div class="AVWG_Component_Guia_destinatario">
-                        <?=$settings["guia_destinatario"]?>: 
-                        <strong>${guia?.destinatario}</strong>
-                    </div>
+                    <?php
+                        foreach ($settings['guia_items'] as $k => $value) {
+                            $key = $value["key"];
+                            $label = $value["label"];
+                            $class = $value["class"];
+                            ?>
+                                <div class="AVWG_Component_Guia_item AVWG_Component_Guia_item_<?=$key?> <?=$class?>">
+                                    <?=$label?>:
+                                    <strong>${guia?.<?=$key?>}</strong>
+                                </div>
+                            <?php
+                        }
+                    ?>
                     <div class="AVWG_Component_Guia_status">
                         <?=$settings["guia_nombreEstadoAve"]?>: 
                         <strong>${guia?.nombreEstadoAve}</strong>
                     </div>
+
                 </div>
             `
         }
