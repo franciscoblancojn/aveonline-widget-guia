@@ -72,7 +72,13 @@ if(!function_exists("github_updater_plugin_wordpress")){
                             'upgrade-plugin_' . $file
                         );
             
-                        $links[] = '<a href="' . esc_url($actualizar_url) . '" style="color: #0073aa; font-weight: bold;">Actualizar</a>';
+                        $links[] = '<a class="github_updater_plugin_wordpress_btn" href="' . esc_url($actualizar_url) . '" style="color: #0073aa; font-weight: bold;">Actualizar</a>
+                            <style>
+                                tr:has(+ tr .github_updater_plugin_wordpress_btn) + tr a{
+                                    display:none;
+                                }
+                            </style>
+                        ';
                     }
                     return $links;
                 }, 10, 2);
