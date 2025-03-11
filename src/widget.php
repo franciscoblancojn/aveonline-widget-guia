@@ -162,6 +162,17 @@ class AVWG_AveFormGuias extends Widget_Base {
             ]
         );
         $this->add_control(
+            'use_get',
+            [
+                'label' => __('Usar Get para Request', 'plugin-name'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Sí', 'plugin-name'),
+                'label_off' => __('No', 'plugin-name'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+        $this->add_control(
             'label',
             [
                 'label' => __('Label', 'plugin-name'),

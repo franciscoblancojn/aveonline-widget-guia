@@ -2,6 +2,10 @@
 
 function AVWG_Component_Form($settings)  {
     ob_start();
+    $defaultGuias = '';
+    if($settings['use_get'] == "yes"){
+        $defaultGuias = $_GET['guias'] ?? '';
+    }
     ?>
     <div class="AVWG_Component_Form">
         <h4 class="AVWG_Component_Form_title">
@@ -22,6 +26,7 @@ function AVWG_Component_Form($settings)  {
                 type="text"
                 placeholder="<?=($settings["placeholder"] ?? "Número de guía")?>"
                 class="AVWG_Component_Form_input"
+                value="<?=$defaultGuias?>"
             />
         </label>
         <div class="AVWG_Component_Form_content_btn">
@@ -117,6 +122,7 @@ function AVWG_Component_Form($settings)  {
                 }
             }
         }
+        AVWG_onGetGuias()
     </script>
     <?php
     return ob_get_clean();
