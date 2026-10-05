@@ -1,6 +1,6 @@
 {
   "name": "aveonline-widget-guia",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Widget para mostrar guias de aveonline en elementor.",
   "main": "index.js",
   "scripts": {
