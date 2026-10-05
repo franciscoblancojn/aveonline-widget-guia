@@ -110,12 +110,24 @@ function AVWG_Component_Form($settings)  {
                 };
             }
         }
+        // Consulta la guía tal cual y con un 0 adelante (si no lo trae) y une los resultados encontrados.
+        // Si ninguna variante existe, retorna solo la guía digitada para mostrar "Guía no Encontrada".
+        const AVWG_onGetGuia = async (n) => {
+            const numeroguia = `${n}`.replaceAll(" ","")
+            const variantes = numeroguia.startsWith("0") ? [numeroguia] : [numeroguia, `0${numeroguia}`]
+            const resultados = await Promise.all(variantes.map(guia => AVWG_onGetGuias_Request(guia)))
+            const encontradas = resultados.filter(guia => guia?.transportadora)
+            if(encontradas.length > 0){
+                return encontradas
+            }
+            return [{ numeroguia }]
+        }
         const AVWG_onGetGuias = async ()=>{
             const guias = `${document.getElementById("AVWG_Component_Form_input")?.value ?? ''}`.split(',')
             if(guias && guias.length > 0 && guias[0]!=''){
                 const btn = document.getElementById("AVWG_Component_Form_btn")
                 btn.classList.add("loader")
-                const guiasResult = await Promise.all(guias.map(guia => AVWG_onGetGuias_Request(guia)));
+                const guiasResult = (await Promise.all(guias.map(guia => AVWG_onGetGuia(guia)))).flat();
                 btn.classList.remove("loader")
                 if(typeof AVWG_onGetGuias_callback == 'function' ){
                     AVWG_onGetGuias_callback(guiasResult)

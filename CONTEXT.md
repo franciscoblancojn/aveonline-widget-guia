@@ -54,7 +54,8 @@ doc/                      → Documentación (DOC-*.md)
 1. `elementor/widgets/register` → `AVWG_register_AveFormGuias()` carga `src/widget.php` y registra el widget.
 2. `AVWG_AveFormGuias::render()` → `AVWG_Component_Widget($settings)`.
 3. Click en el botón (o carga con `?guias=` si `use_get`) → `AVWG_onGetGuias()`:
-   - separa por comas, llama `AVWG_onGetGuias_Request(guia)` en paralelo (`POST` JSON `{tipo: "infoGuiaP2PV3", guia}`),
+   - separa por comas y por cada guía llama `AVWG_onGetGuia(guia)`,
+   - `AVWG_onGetGuia` consulta la guía y la guía con `0` adelante (si no inicia con `0`) vía `AVWG_onGetGuias_Request` (`POST` JSON `{tipo: "infoGuiaP2PV3", guia}`) y une las variantes encontradas; si ninguna existe devuelve `[{numeroguia}]` (→ "Guía no Encontrada"),
    - invoca `AVWG_onGetGuias_callback(guias)` definido en `guias.php`.
 4. `AVWG_onGetHtmlGuia(guia)` arma el HTML por guía con los items del repeater `guia_items` (clave → `guia[key]`).
 
