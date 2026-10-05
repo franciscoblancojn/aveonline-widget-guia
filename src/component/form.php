@@ -110,11 +110,11 @@ function AVWG_Component_Form($settings)  {
                 };
             }
         }
-        // Consulta la guía tal cual y con un 0 adelante (si no lo trae) y une los resultados encontrados.
+        // Consulta la guía tal cual y su variante con/sin 0 adelante (1234 ↔ 01234) y une los resultados encontrados.
         // Si ninguna variante existe, retorna solo la guía digitada para mostrar "Guía no Encontrada".
         const AVWG_onGetGuia = async (n) => {
             const numeroguia = `${n}`.replaceAll(" ","")
-            const variantes = numeroguia.startsWith("0") ? [numeroguia] : [numeroguia, `0${numeroguia}`]
+            const variantes = (numeroguia.startsWith("0") ? [numeroguia, numeroguia.slice(1)] : [numeroguia, `0${numeroguia}`]).filter(guia => guia != "")
             const resultados = await Promise.all(variantes.map(guia => AVWG_onGetGuias_Request(guia)))
             const encontradas = resultados.filter(guia => guia?.transportadora)
             if(encontradas.length > 0){

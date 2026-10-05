@@ -38,7 +38,7 @@ Content-Type: application/json
 - `AVWG_onGetGuias_Request` siempre devuelve `numeroguia`, incluso en error.
 - `AVWG_onGetGuias_callback(guias)` es el contrato entre `form.php` y `guias.php`: no lo renombres.
 - Múltiples guías se separan por comas y se consultan en paralelo (`Promise.all`).
-- `AVWG_onGetGuia(n)` consulta `n` y `0n` (si `n` no inicia con `0`) y devuelve un array con las variantes encontradas (tienen `transportadora`); si ninguna existe devuelve `[{numeroguia: n}]`. El resultado final se aplana con `.flat()`.
+- `AVWG_onGetGuia(n)` consulta `n` y `0n` (si `n` no inicia con `0`) o `n` sin el primer `0` (si inicia con `0`) y devuelve un array con las variantes encontradas (tienen `transportadora`); si ninguna existe devuelve `[{numeroguia: n}]`. El resultado final se aplana con `.flat()`.
 
 ## Escape
 
