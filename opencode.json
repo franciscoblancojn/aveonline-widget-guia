@@ -1,0 +1,67 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "username": "developer",
+  "instructions": ["AGENTS.md", "CONTEXT.md"],
+  "agent": {
+    "avwg-dev": {
+      "description": "WordPress/Elementor plugin developer especializado en Aveonline widget guia. Usa este agente cuando trabajes en funcionalidades del plugin AVWG.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "git add *": "deny",
+          "git commit *": "deny",
+          "git commit": "deny",
+          "git merge *": "deny",
+          "git merge": "deny",
+          "git push *": "deny",
+          "git push": "deny",
+          "git diff *": "allow",
+          "git log *": "allow",
+          "git status": "allow",
+          "npm *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "avwg-reviewer": {
+      "description": "Revisor de código que valida que los cambios cumplan las reglas del plugin AVWG y WordPress Coding Standards.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "git diff *": "allow",
+          "git log *": "allow",
+          "git status": "allow",
+          "bash bin/harness.sh": "allow",
+          "*": "deny"
+        }
+      }
+    }
+  },
+  "skills": {
+    "paths": [".rules"]
+  },
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "git add *": "deny",
+      "git commit *": "deny",
+      "git commit": "deny",
+      "git merge *": "deny",
+      "git merge": "deny",
+      "git push *": "deny",
+      "git push": "deny",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "git status": "allow",
+      "git *": "allow",
+      "npm run push-v *": "deny",
+      "npm run push-tag": "deny",
+      "npm *": "allow",
+      "composer *": "allow",
+      "wp *": "ask",
+      "*": "ask"
+    }
+  }
+}

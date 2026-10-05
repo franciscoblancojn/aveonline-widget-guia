@@ -14,6 +14,8 @@ Text Domain: aveonline-widget-guia
 if (!function_exists( 'is_plugin_active' ))
     require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 
+require_once __DIR__ . '/libs/autoload.php';
+
 //AVWG_
 define("AVWG_KEY",'AVWG');
 define("AVWG_SLUG",'aveonline-widget-guia');
@@ -22,8 +24,9 @@ define("AVWG_DIR",plugin_dir_path( __FILE__ ));
 define("AVWG_URL",plugin_dir_url(__FILE__));
 define("AVWG_BASENAME",plugin_basename(__FILE__));
 
-require_once AVWG_DIR . 'update.php';
-github_updater_plugin_wordpress([
+use franciscoblancojn\wordpress_utils\FWUUpdate;
+
+FWUUpdate::init([
     'basename'=>AVWG_BASENAME,
     'dir'=>AVWG_DIR,
     'file'=>"index.php",

@@ -27,6 +27,13 @@ It is an plugin of wordpress, for Aveonline show Guia in Colombia with Elementor
 5. Active Plugin
 
 
+## Development
+
+* `npm run install` → instala `libs/` (Composer, `franciscoblancojn/wordpress_utils`).
+* `npm run check` → ejecuta el harness de validación (`bin/harness.sh`).
+* `npm run push-v -- major|minor|patch` → bump de versión, tag y push (ver `doc/DOC-UPDATE.md`).
+* Reglas para IAs: `AGENTS.md`, contexto: `CONTEXT.md`.
+
 ## Developer
 
 * Name: Francisco Blanco
